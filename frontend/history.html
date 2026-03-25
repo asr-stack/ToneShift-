@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation History - Tone Sift</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Kalam:wght@300;400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        try {
+            const storage = JSON.parse(localStorage.getItem('genzTranslator') || '{}');
+            const user = storage.user;
+            if (user && user.loggedIn) {
+                document.addEventListener('DOMContentLoaded', () => {
+                    const navProfileName = document.querySelector('.profile-name');
+                    if (navProfileName) {
+                        navProfileName.textContent = user.name || 'User Name';
+                    }
+                    const navProfileImage = document.querySelector('.profile-image-nav');
+                    if (navProfileImage) {
+                        navProfileImage.textContent = (user.name || user.email || 'U').charAt(0).toUpperCase();
+                    }
+                });
+            }
+        } catch (e) {
+            // ignore
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <h1 class="brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" fill="#8b5cf6" opacity="0.18"/>
+                    <path d="M8 12c1.2-2 3.8-3 6-2" stroke="#8b5cf6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 15c1.6-.5 3.4-.5 5 0" stroke="#7c5cff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>ToneShift</span>
+            </h1>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html"> 合 Home</a></li>
+            <li><a href="history.html"> 🕮 History</a></li>
+            <li><a href="about.html"> ⓘ About</a></li>
+            <li><a href="contact.html"> ☎ Contact</a></li>
+            <!-- Profile section in nav -->
+            <li class="profile-nav">
+                <div class="profile-section-nav">
+                    <a href="profile.html" class="profile-nav-item">
+                        <div class="profile-image-nav">U</div>
+                        <div class="profile-text-nav">
+                            <div class="profile-name">User Name</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+      <!-- login/logout button -->
+        <div class="navbar-bottom">
+             <a href="login.html" class="logout-btn" id="auth-link">🔐 Login</a>
+        </div>
+
+    </div>
+</nav>
+    <main class="container">
+        <div class="history-header">
+            <h2>Your Translation History</h2>
+            <div class="history-controls">
+                <label for="filter-tone" style="font-weight: bold; margin-right: 0.5rem;">Filter by Tone:</label>
+                <select id="filter-tone" class="filter-select">
+                    <option value="all">All Tones</option>
+                    <option value="corporate">Corporate</option>
+                    <option value="academic">Academic</option>
+                    <option value="formal">Formal</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Inline message area (replaces alert/confirm) -->
+        <div id="history-message" class="message" style="display:none;"></div>
+
+        <div id="history-container" class="history-container">
+            <div class="empty-state" id="empty-state">
+                <p>📝 No translations yet. Start translating on the home page!</p>
+            </div>
+        </div>
+
+        <div class="clear-all-container">
+            <button id="clear-history" class="clear-all-btn">
+                 Clear All
+            </button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Tone Sift. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

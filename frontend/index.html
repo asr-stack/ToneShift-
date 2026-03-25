@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen-Z to Formal Translator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Kalam:wght@300;400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        try {
+            const storage = JSON.parse(localStorage.getItem('genzTranslator') || '{}');
+            const user = storage.user;
+            if (user && user.loggedIn) {
+                document.addEventListener('DOMContentLoaded', () => {
+                    const navProfileName = document.querySelector('.profile-name');
+                    if (navProfileName) {
+                        navProfileName.textContent = user.name || 'User Name';
+                    }
+                    const navProfileImage = document.querySelector('.profile-image-nav');
+                    if (navProfileImage) {
+                        navProfileImage.textContent = (user.name || user.email || 'U').charAt(0).toUpperCase();
+                    }
+                });
+            }
+        } catch (e) {
+            // ignore
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <h1 class="brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" fill="#8b5cf6" opacity="0.18"/>
+                    <path d="M8 12c1.2-2 3.8-3 6-2" stroke="#8b5cf6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 15c1.6-.5 3.4-.5 5 0" stroke="#7c5cff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>ToneShift</span>
+            </h1>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html"> 𖠿 Home</a></li>
+            <li><a href="history.html"> 🕮 History</a></li>
+            <li><a href="about.html"> ⓘ About</a></li>
+            <li><a href="contact.html"> ☎ Contact</a></li>
+            <!-- Profile section in nav -->
+            <li class="profile-nav">
+                <div class="profile-section-nav">
+                    <a href="profile.html" class="profile-nav-item">
+                        <div class="profile-image-nav">U</div>
+                        <div class="profile-text-nav">
+                            <div class="profile-name">User Name</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <!-- login/logout button -->
+        <div class="navbar-bottom">
+             <a href="login.html" class="logout-btn" id="auth-link">🔐 Login</a>
+        </div>
+    </div>
+</nav>
+
+    <main class="container">
+        <div class="hero-section">
+            <h2 class="hero-title">Transform Your Slang Here ! </h2>
+            <p class="hero-subtitle">Make your messages corporate-ready, academic, or formal in seconds</p>
+        </div>
+
+        <div class="translator-box">
+            <div class="input-section">
+                <label for="input-text">Enter Gen-Z Text:</label>
+                <textarea id="input-text" placeholder="Type your Gen-Z slang here... e.g., 'no cap, that presentation was fire!'"></textarea>
+                <div class="tone-selector">
+                    <label for="tone-select">Translation Tone:</label>
+                    <select id="tone-select">
+                        <option value="corporate">Corporate</option>
+                        <option value="academic">Academic</option>
+                        <option value="formal">Formal</option>
+                    </select>
+                </div>
+                <button id="translate-btn" class="btn-primary">Translate Now</button>
+            </div>
+
+            <div class="output-section">
+                <label for="output-text">Translated Text:</label>
+                <textarea id="output-text" readonly placeholder="Your professional translation will appear here..."></textarea>
+                <div class="action-buttons">
+                    <button id="copy-btn" class="btn-secondary">Copy</button>
+                    <button id="clear-btn" class="btn-secondary">Clear</button>
+                    <button id="save-btn" class="btn-secondary">Save to History</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-container"></div>
+        
+        <div class="examples-section">
+            <h3>Popular Translations</h3>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-genz">"That's cap, bro!"</div>
+                    <div class="example-formal">"That assertion is inaccurate, my colleague."</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-genz">"This is giving main character energy"</div>
+                    <div class="example-formal">"This demonstrates exceptional leadership qualities"</div>
+                </div>
+                <div class="example-card">
+                    <div class="example-genz">"No cap, this is fire!"</div>
+                    <div class="example-formal">"I must admit, this is exceptionally impressive"</div>
+                </div>
+            </div>
+        </div>  
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Gen-Z Translator. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

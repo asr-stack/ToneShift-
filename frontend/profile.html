@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Tone Sift</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Kalam:wght@300;400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        try {
+            const storage = JSON.parse(localStorage.getItem('genzTranslator') || '{}');
+            const user = storage.user;
+            if (user && user.loggedIn) {
+                document.addEventListener('DOMContentLoaded', () => {
+                    const navProfileName = document.querySelector('.profile-name');
+                    if (navProfileName) {
+                        navProfileName.textContent = user.name || 'User Name';
+                    }
+                    const navProfileImage = document.querySelector('.profile-image-nav');
+                    if (navProfileImage) {
+                        navProfileImage.textContent = (user.name || user.email || 'U').charAt(0).toUpperCase();
+                    }
+                });
+            }
+        } catch (e) {
+            // ignore
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <h1 class="brand">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" fill="#8b5cf6" opacity="0.18"/>
+                    <path d="M8 12c1.2-2 3.8-3 6-2" stroke="#8b5cf6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 15c1.6-.5 3.4-.5 5 0" stroke="#7c5cff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>ToneShift</span>
+            </h1>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html"> 合 Home</a></li>
+            <li><a href="history.html"> 🕮 History</a></li>
+            <li><a href="about.html"> ⓘ About</a></li>
+            <li><a href="contact.html"> ☎ Contact</a></li>
+            <!-- Profile section in nav -->
+            <li class="profile-nav">
+                <div class="profile-section-nav">
+                    <a href="profile.html" class="profile-nav-item">
+                        <div class="profile-image-nav">U</div>
+                        <div class="profile-text-nav">
+                            <div class="profile-name">User Name</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <!-- login/logout button -->
+        <div class="navbar-bottom">
+             <a href="login.html" class="logout-btn" id="auth-link">🔐 Login</a>
+        </div>
+        
+    </div>
+</nav>
+    <main class="container">
+        <div class="profile-section">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <div class="avatar-circle">
+                        <span id="avatar-initial">U</span>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h2 id="profile-name">User Name</h2>
+                    <p id="profile-email">user@example.com</p>
+                    <p class="profile-join-date" id="profile-date">Member since: Loading...</p>
+                </div>
+            </div>
+
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-translations">0</div>
+                    <div class="stat-label">Total Translations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="corporate-count">0</div>
+                    <div class="stat-label">Corporate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="academic-count">0</div>
+                    <div class="stat-label">Academic</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="formal-count">0</div>
+                    <div class="stat-label">Formal</div>
+                </div>
+            </div>
+
+            <div class="profile-content">
+                <div class="profile-section-card">
+                    <h3>Account Information</h3>
+                    <div class="info-row">
+                        <span class="info-label">Full Name:</span>
+                        <span class="info-value" id="info-name">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Email Address:</span>
+                        <span class="info-value" id="info-email">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Account Created:</span>
+                        <span class="info-value" id="info-date">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Last Login:</span>
+                        <span class="info-value" id="info-last-login">-</span>
+                    </div>
+                </div>
+
+                <div class="profile-section-card">
+                    <h3>Account Actions</h3>
+                    <button class="btn-secondary btn-full" id="edit-profile-btn" style="margin-bottom: 1rem;">
+                        Edit Profile
+                    </button>
+                    <button class="btn-secondary btn-full" id="change-password-btn" style="margin-bottom: 1rem;">
+                        Change Password
+                    </button>
+                    <button class="btn-danger btn-full" id="delete-account-btn">
+                        Delete Account
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Tone Sift. All rights reserved.</p>
+    </footer>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h3>Edit Profile</h3>
+            <form id="edit-profile-form">
+                <div class="form-group">
+                    <label for="edit-name">Full Name:</label>
+                    <input type="text" id="edit-name" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" id="cancel-edit" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="change-password-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h3>Change Password</h3>
+            <div id="password-error" class="error-message" style="display: none;"></div>
+            <form id="change-password-form">
+                <div class="form-group">
+                    <label for="old-password">Current Password:</label>
+                    <div class="password-input-container">
+                        <input type="password" id="old-password" required>
+                        <button type="button" class="toggle-password" data-target="old-password">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password:</label>
+                    <div class="password-input-container">
+                        <input type="password" id="new-password" required>
+                        <button type="button" class="toggle-password" data-target="new-password">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="password-requirements">
+                        <div class="requirement" data-requirement="length">
+                            <span class="check">✗</span> At least 8 characters
+                        </div>
+                        <div class="requirement" data-requirement="uppercase">
+                            <span class="check">✗</span> One uppercase letter
+                        </div>
+                        <div class="requirement" data-requirement="number">
+                            <span class="check">✗</span> One number
+                        </div>
+                        <div class="requirement" data-requirement="special">
+                            <span class="check">✗</span> One special character
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm New Password:</label>
+                    <div class="password-input-container">
+                        <input type="password" id="confirm-password" required>
+                        <button type="button" class="toggle-password" data-target="confirm-password">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" id="cancel-password" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Change Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
